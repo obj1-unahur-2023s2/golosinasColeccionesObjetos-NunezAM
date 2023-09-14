@@ -35,7 +35,7 @@ object caramelo {
 	method esLibreDeGluten() = true
 	
 	method recibirMordisco() {
-		peso = 0.max(peso --)
+		peso = 0.max(peso - 1)
 	}
 }
 
@@ -78,6 +78,7 @@ object chocolatin {
 	
 	method precio() = pesoInicial * 0.5
 	method peso() = peso
+	method sabor() = "chocolate"
 	method esLibreDeGluten() = false
 	method pesoInicial(unPeso) {
 		pesoInicial = unPeso
@@ -106,10 +107,11 @@ object golosinaBaniada {
 }
 
 object pastillaTuttiFrutti {
-	var peso = 5
 	var sabor = "frutilla"
 	var property esLibreDeGluten
 	
+	method sabor() = sabor
+	method peso() = 5
 	method precio() {
 		return if(esLibreDeGluten) {
 			7

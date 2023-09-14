@@ -1,6 +1,89 @@
+import mariano.*
+import golosinas.*
 
-test "testX" {
-
-	assert.that(true)
-
+describe "tests de Mariano" {
+	
+	method initialize() {
+		mariano.comprar(chocolatin)
+		chocolatin.pesoInicial(26)
+		mariano.comprar(caramelo)
+		mariano.comprar(bombon)
+	}
+	
+	test "Mariano compra el chocolatin, el caramelo y el bombon" {
+		assert.equals([chocolatin,caramelo,bombon], mariano.bolsaDeGolosinas())
+	}
+	
+	test "Mariano desecha el caramelo" {
+		mariano.desechar(caramelo)
+		assert.notThat(mariano.tieneLaGolosina(caramelo))
+	}
+	
+	test "Mariano tiene 3 golosinas" {
+		assert.equals(3, mariano.cantidadDeGolosinas())
+	}
+	
+	test "Mariano prueba todas las golosinas" {
+		mariano.probarGolosinas()
+		assert.equals(11, bombon.peso())
+		assert.equals(4, caramelo.peso())
+		assert.equals(24, chocolatin.peso())
+	}
+	
+	test "Mariano tiene una golosina sin TACC" {
+		assert.that(mariano.hayGolosinaSinTACC())
+	}
+	
+	test "Mariano no tiene golosinas con precios cuidados" {
+		assert.notThat(mariano.preciosCuidados())
+	}
+	
+	test "Mariano tiene una golosina de sabor frutilla" {
+		assert.equals(caramelo, mariano.golosinaDeSabor("frutilla"))
+	}
+		
+	test "Mariano filtra las golosinas de chocolate, quedando solo el chocolatin" {
+		assert.equals([chocolatin], mariano.golosinasDeSabor("chocolate"))
+	}
+	
+	test "Mariano tiene los sabores frutilla y chocolate" {
+		assert.equals(#{"frutilla","chocolate"}, mariano.sabores())
+	}
+	
+	test "Mariano tiene como golosina más cara el chocolatin" {
+		assert.equals(chocolatin, mariano.golosinaMasCara())
+	}
+	
+	test "El peso de las golosinas es 46" {
+		assert.equals(46, mariano.pesoGolosinas())
+	}
+	
+	test "A Mariano le faltan el alfajor y el chupetín" {
+		assert.equals(#{alfajor,chupetin}, mariano.golosinasFaltantes(#{alfajor, bombon, chocolatin, chupetin}))
+	}
+	
+	test "A Mariano le faltan los sabores melón y vainilla" {
+		assert.equals(#{"melon", "vainilla"}, mariano.gustosFaltantes(#{"melon", "chocolate", "frutilla", "vainilla"}))
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

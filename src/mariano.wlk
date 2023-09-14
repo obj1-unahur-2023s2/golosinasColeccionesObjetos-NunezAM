@@ -1,35 +1,40 @@
 import golosinas.*
 
 object mariano {
-	var bolsa = []
+	var bolsaDeGolosinas = []
 	
+	method bolsaDeGolosinas() = bolsaDeGolosinas
 	method comprar(unaGolosina) {
-		bolsa.add(unaGolosina)
+		bolsaDeGolosinas.add(unaGolosina)
 	}
 	
 	method desechar(unaGolosina) {
-		bolsa.remove(unaGolosina)
+		bolsaDeGolosinas.remove(unaGolosina)
 	}
 	
-	method cantidadDeGolosinas() = bolsa.size()
+	method cantidadDeGolosinas() = bolsaDeGolosinas.size()
 	
-	method tieneLaGolosina(unaGolosina) = bolsa.contains(unaGolosina)
+	method tieneLaGolosina(unaGolosina) = bolsaDeGolosinas.contains(unaGolosina)
 	
 	method probarGolosinas() {
-		bolsa.forEach({golosina => golosina.recibirMordisco()})
+		bolsaDeGolosinas.forEach({golosina => golosina.recibirMordisco()})
 	}
 	
-	method hayGolosinaSinTACC() = bolsa.any({golosina => golosina.esLibreDeGluten()})
+	method hayGolosinaSinTACC() = bolsaDeGolosinas.any({golosina => golosina.esLibreDeGluten()})
 	
-	method preciosCuidados() = bolsa.all({golosina => golosina.precio() <= 10})
+	method preciosCuidados() = bolsaDeGolosinas.all({golosina => golosina.precio() <= 10})
 	
-	method golosinaDeSabor(unSabor) = bolsa.find({golosina => golosina.sabor() == unSabor})
+	method golosinaDeSabor(unSabor) = bolsaDeGolosinas.find({golosina => golosina.sabor() == unSabor})
 	
-	method golosinasDeSabor(unSabor) = bolsa.filter({golosina => golosina.sabor() == unSabor})
+	method golosinasDeSabor(unSabor) = bolsaDeGolosinas.filter({golosina => golosina.sabor() == unSabor})
 	
-	method sabores() = bolsa.map({golosina => golosina.sabor()}).asSet()
+	method sabores() = bolsaDeGolosinas.map({golosina => golosina.sabor()}).asSet()
 	
-	method golosinaMasCara() = bolsa.max({golosina => golosina.precio()})
+	method golosinaMasCara() = bolsaDeGolosinas.max({golosina => golosina.precio()})
 	
-	method pesoGolosinas() = bolsa.sum({golosina => golosina.peso()})
+	method pesoGolosinas() = bolsaDeGolosinas.sum({golosina => golosina.peso()})
+	
+	method golosinasFaltantes(golosinasDeseadas) = golosinasDeseadas.filter( {golosina => !self.tieneLaGolosina(golosina)} )
+	
+	method gustosFaltantes(gustosDeseados) = gustosDeseados.filter({gusto => !self.sabores().contains(gusto) })
 }
