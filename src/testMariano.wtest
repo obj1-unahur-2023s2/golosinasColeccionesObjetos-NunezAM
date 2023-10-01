@@ -65,6 +65,23 @@ describe "tests de Mariano" {
 	test "A Mariano le faltan los sabores melón y vainilla" {
 		assert.equals(#{"melon", "vainilla"}, mariano.gustosFaltantes(#{"melon", "chocolate", "frutilla", "vainilla"}))
 	}
+	
+	test "Lo que gastó en sabor frutilla es de 6" {
+		assert.equals(6, mariano.gastoEn("frutilla"))
+	}
+	
+	test "El sabor más popular es frutilla" {
+		assert.equals("frutilla", mariano.saborMasPopular())
+	}
+	
+	test "El sabor del que tiene más peso es chocolate" {
+		assert.equals("chocolate", mariano.saborMasPesado())
+	}
+	
+	test "Mariano compró y luego desecho el chocolate" {
+		mariano.desechar(chocolatin)
+		assert.that(mariano.comproYDesecho(chocolatin))
+	}
 }
 
 
